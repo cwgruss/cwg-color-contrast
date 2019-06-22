@@ -1,26 +1,23 @@
 {
   "name": "cwg-color-contrast",
   "version": "0.0.0",
-  "description": "A tool for choosing and testing accessibile colors.",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "browser": "dist/index.bundle.js",
-  "files": [
-    "dist/"
-  ],
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "http-server ./dist/",
-    "build": "npm run build:js",
-    "build:js": "rollup -c && tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cwgruss/cwg-color-contrast.git"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "http-server": "^0.11.1",
-    "rollup": "^1.15.5",
-    "rollup-plugin-terser": "^5.0.0",
-    "rollup-plugin-typescript2": "^0.21.1",
+  "bugs": {
+    "url": "https://github.com/cwgruss/cwg-color-contrast/issues"
+  },
+  "homepage": "https://github.com/cwgruss/cwg-color-contrast#readme",
+  "devDependencies": {
+    "lerna": "^3.8.0",
     "typescript": "^3.5.2"
   }
 }
