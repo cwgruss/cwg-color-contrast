@@ -1,6 +1,3 @@
-
-# Ignore dist or build files
-dist
-
-# Ignore dependencies
 node_modules
+
+**/dist/**

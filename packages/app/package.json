@@ -1,0 +1,26 @@
+{
+  "name": "app",
+  "version": "0.0.0",
+  "description": "A web application for checking color contrast",
+  "author": "Carter Gruss <cwgruss@gmail.com>",
+  "homepage": "https://github.com/cwgruss/cwg-color-contrast/tree/master/packages/app#readme",
+  "license": "ISC",
+  "main": "src/app.ts",
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cwgruss/cwg-color-contrast.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/cwgruss/cwg-color-contrast/issues"
+  }
+}
