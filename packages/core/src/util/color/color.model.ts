@@ -124,28 +124,28 @@ export class Color {
 }
 
 
-function isHexValue(value: string): boolean {
+export function isHexValue(value: string): boolean {
     if(isString(value)) {
         return hexValueRegex.test(value);
     }
     return false;
 }
 
-function isRGBValue(value: string): boolean {
+export function isRGBValue(value: string): boolean {
     if(isString(value)) {
         return rgbValueRegex.test(value);
     }
     return false;
 }
 
-function isRGBAValue(value: string): boolean {
+export function isRGBAValue(value: string): boolean {
     if(isString(value)) {
         return rgbaValueRegex.test(value);
     }
     return false;
 }
 
-function isHSLValue(value: string): boolean {
+export function isHSLValue(value: string): boolean {
     if(isString(value)) {
         return hslValueRegex.test(value);
     }
