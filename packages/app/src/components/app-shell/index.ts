@@ -1,7 +1,7 @@
 import { PolymerElement, html } from "@polymer/polymer";
 import { customElement, property, observe } from "@polymer/decorators";
 import "@polymer/paper-input/paper-input.js";
-import { Color, isHexValue } from "@color-contrast/core/dist";
+import { Color, isHexValue, shades, tints, mix } from "@color-contrast/core/dist";
 import { wrap, proxy } from "comlink";
 
 import { nextEvent } from "../../util/scheduling";
@@ -43,16 +43,13 @@ export class CwgAppShell extends PolymerElement {
   constrastRatio: string = "";
   
   @property({type: Array})
-  public colors: Color[] = [
-    new Color(this.backgroundColor),
-    new Color(this.foregroundColor)
-  ];
+  public colors: {hex: string, hsl: string}[] = tints(mix(new Color('#FF0'), new Color('#333'), 10), 5).map((color: Color) => {    
+    return {
+      'hex': color.toHex(),
+      'hsl': color.toHSL(),
+    };
+  });
 
-  @property({type: Array })
-  public palletes = [
-    {label: 'Primary', hex: this.colors[0].toHex() },
-    {label: 'Secondary', hex: this.colors[1].toHex() }
-  ]
 
   _contrastWorker?: import("comlink/src/comlink").Remote<
     import("../../worker").ColorContrastWorker
@@ -78,14 +75,14 @@ export class CwgAppShell extends PolymerElement {
       </div>
       
       <section class="main-view">
-      <dom-repeat items={{palletes}}>
+      <dom-repeat items={{colors}}>
         <template>
         <div class="accessibility">
             <ul class="accessibility__items">
                 <li class="accessibility__item">
                     <div class="accessibility-item" style$="background-color: [[item.hex]];">
                         <div class="accessibility-item__header">
-                          <p>{{item.label}}</p>
+                          <p>{{item.hsl}}</p>
                           <p>{{item.hex}}</p>
                         </div>
                         <div class="accessibility-item__table"></div>
