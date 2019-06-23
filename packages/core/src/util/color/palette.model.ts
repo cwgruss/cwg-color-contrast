@@ -20,7 +20,7 @@ export class ColorPalette {
       return this._paletteName;
   }
 
-  values(): Color[] {
+  get colors(): Color[] {
     return Array.from(this._colors.values());
   }
 
