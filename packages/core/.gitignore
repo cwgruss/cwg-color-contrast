@@ -1,6 +1,8 @@
 
 # Ignore dist or build files
 dist
+coverage
+.nyc_output
 
 # Ignore dependencies
 node_modules
