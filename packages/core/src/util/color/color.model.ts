@@ -12,7 +12,7 @@ export class Color {
   private _blue: number;
   private _alpha: number;
 
-  constructor();
+
   constructor(colorStr?: ColorString);
   constructor(red?: ColorValue, green?: ColorValue, blue?: ColorValue);
   constructor(

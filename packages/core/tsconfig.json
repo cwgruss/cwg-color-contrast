@@ -1,6 +1,15 @@
 {
-    "extends": "../../tsconfig.json",
-    "include": [
-        "src/index.ts"
+    "compilerOptions": {
+		"module": "es6",
+		"noImplicitAny": true,
+		"outDir": "dist",
+		"target": "es5",
+        "skipLibCheck": true,
+        "strict": true,
+        "downlevelIteration": false
+    },
+    "exclude": [
+        "node_modules",
+        "src/**/*.test.ts"
     ]
 }

@@ -43,9 +43,13 @@ export class CwgAppShell extends PolymerElement {
   constrastRatio: string = "";
   
   @property({type: Array})
+<<<<<<< HEAD
   public colors: {hex: string, hsl: string}[] = tints(new Color('#333'), 28)
   .map((color: Color) => mix(color, new Color('#D300F4'), 95))
   .map((color: Color) => {    
+=======
+  public colors: {hex: string, hsl: string}[] = tints(mix(new Color('#FF0'), new Color('#333'), 10), 5).map((color: Color) => {    
+>>>>>>> 3082495fbe1558e811dc5ac27fe251033ed03926
     return {
       'hex': color.toHex(),
       'hsl': color.toHSL(),
