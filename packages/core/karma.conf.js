@@ -2,7 +2,7 @@ module.exports = function(config) {
   config.set({
     frameworks: ["karma-typescript", 'mocha', 'chai'],
     files: [
-      { pattern: "src/**/*.ts", include: true }
+      { pattern: "src/**/!(test)*.ts", include: true }
     ],
     preprocessors: {
       "**/*.ts": "karma-typescript"
@@ -18,9 +18,12 @@ module.exports = function(config) {
       compilerOptions: {
         target: "es5"
       },
-      exclude: ["node_modules"],
+      exclude: [
+        "node_modules",
+        "*.test.ts"
+      ],
       coverageOptions: {
-        exclude: [/\.test\.ts$/]
+        exclude: [ /test\.ts$/]
       }
     },
     browsers: ["ChromeHeadless"],
