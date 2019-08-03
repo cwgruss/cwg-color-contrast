@@ -7,10 +7,10 @@ export type ColorString = string;
 export type ColorValue = string | number;
 
 export class Color {
-  private _red: number;
-  private _green: number;
-  private _blue: number;
-  private _alpha: number;
+  private _red: number = -1;
+  private _green: number =-1;
+  private _blue: number = -1;
+  private _alpha: number = -1;
 
 
   constructor(colorStr?: ColorString);
@@ -111,6 +111,11 @@ export class Color {
     let red = this._red.toString(16);
     let green = this._green.toString(16);
     let blue = this._blue.toString(16);
+
+    // Force to uppercase
+    red = red.toUpperCase();
+    green = green.toUpperCase();
+    blue = blue.toUpperCase();
 
     red = red.length === 1 ? `0${red}` : red;
     green = green.length === 1 ? `0${green}` : green;
