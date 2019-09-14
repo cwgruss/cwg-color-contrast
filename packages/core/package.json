@@ -10,8 +10,9 @@
   ],
   "scripts": {
     "start": "http-server ./dist/",
-    "build": "npm run build:js",
+    "build": "npm run build:js && npm run build:wasm",
     "build:js": "rollup -c && tsc",
+    "build:wasm": "emcc -O2 -s WASM=1 -s EXTRA_EXPORTED_RUNTIME_METHODS='[\"cwrap\"]' src/util/color/wcag-color-contrast.c -o dist/wcag-color-contrast.wasm.js",
     "clean": "rimraf dist/",
     "test": "karma start",
     "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" mocha -r ts-node/register src/**/*.test.ts && nyc report"
