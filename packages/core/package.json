@@ -40,7 +40,7 @@
     "url": "https://github.com/cwgruss/cwg-color-contrast/issues"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.7",
+    "@types/chai": "^4.2.4",
     "@types/karma": "^3.0.3",
     "@types/mocha": "^5.2.7",
     "chai": "^4.2.0",
