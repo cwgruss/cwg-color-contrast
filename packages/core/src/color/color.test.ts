@@ -1,5 +1,6 @@
 import { Color } from './color.model';
 import { assert } from 'chai';
+import 'mocha';
 
 describe('Color', () => {
     describe('Color Model', () => {
