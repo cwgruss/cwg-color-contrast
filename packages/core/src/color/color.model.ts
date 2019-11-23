@@ -1,3 +1,5 @@
+import { isString } from '../util/string-util';
+
 export const hexValueRegex = /^(?:#|0x)([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
 export const rgbValueRegex = /^rgb\((\d{1,3}),\s?(\d{1,3}),\s?(\d{1,3})\s?\)$/;
 export const rgbaValueRegex = /^rgba\((\d{1,3}),\s?(\d{1,3}),\s?(\d{1,3}),\s?((?:\d\.)?\d{1,3})\)$/;
@@ -12,6 +14,18 @@ export class Color {
   private _blue: number = -1;
   private _alpha: number = -1;
 
+
+  get redChannel(): number {
+    return this._red;
+  }
+
+  get greenChannel(): number {
+    return this._green;
+  }
+
+  get blueChannel(): number {
+    return this._blue;
+  }
 
   constructor(colorStr?: ColorString);
   constructor(red?: ColorValue, green?: ColorValue, blue?: ColorValue);
@@ -38,7 +52,7 @@ export class Color {
 
 
       if (isHSLValue(red)) {
-        const res = hslValueRegex.exec(red);
+        const res = hslValueRegex!.exec(red) || [];
         const hue = parseInt(res[1]);
         const saturation = parseInt(res[2], 10) / 100;
         const lightness = parseInt(res[3], 10) / 100;
@@ -82,7 +96,7 @@ export class Color {
       }
 
       if (isRGBValue(red) || isRGBAValue(red)) {
-        const res = rgbValueRegex.exec(red);
+        const res = rgbValueRegex!.exec(red) || [];
         this._red = parseInt(res[1], 10);
         this._green = parseInt(res[2], 10);
         this._blue = parseInt(res[3], 10);
@@ -95,16 +109,6 @@ export class Color {
       this._blue = <number>blue;
       this._alpha = <number>alpha || 1;
     }
-  }
-
-  get redChannel(): number {
-    return this._red;
-  }
-  get greenChannel(): number {
-    return this._green;
-  }
-  get blueChannel(): number {
-    return this._blue;
   }
 
   toHex(): string {
@@ -211,7 +215,7 @@ export function isHSLValue(value: string): boolean {
 export function hsl(
   color: Color
 ): { hue: number; saturation: number; lightness: number } {
-  const res = hslValueRegex.exec(color.toHSL());
+  const res = hslValueRegex!.exec(color.toHSL()) || [];
   return {
     hue: +res[1],
     saturation: +res[2],
@@ -222,7 +226,7 @@ export function hsl(
 export function rgb(
   color: Color
 ): { red: number; green: number; blue: number } {
-  const res = rgbValueRegex.exec(color.toRGB());
+  const res = rgbValueRegex!.exec(color.toRGB()) || [];
   
   return {
     red: +res[1],
@@ -231,6 +235,4 @@ export function rgb(
   };
 }
 
-function isString(value: any): boolean {
-  return typeof value === "string";
-}
+
