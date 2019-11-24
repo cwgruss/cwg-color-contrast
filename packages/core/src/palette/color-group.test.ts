@@ -70,9 +70,7 @@ describe('Palette', () => {
                     hex = hex.slice(0, -2) + 'FF';
                     return new Color(hex);
                 });
-
-                newColorGroup.forEach((color) => console.log(color.toHex()))
-
+                
                 expect(newColorGroup).to.eql([
                     new Color('#FFF'),
                     new Color('#CCF'),

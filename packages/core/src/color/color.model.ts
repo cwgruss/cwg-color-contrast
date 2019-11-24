@@ -1,4 +1,5 @@
 import { isString } from '../util/string-util';
+import { calcRelativeLuminance } from './wcag-color-contrast';
 
 export const hexValueRegex = /^(?:#|0x)([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
 export const rgbValueRegex = /^rgb\((\d{1,3}),\s?(\d{1,3}),\s?(\d{1,3})\s?\)$/;
@@ -8,12 +9,25 @@ export const hslValueRegex = /^hsl\((\d+)\%?,\s*([\d.]+)\%?,\s*([\d.]+)\%?\)$/;
 export type ColorString = string;
 export type ColorValue = string | number;
 
+interface RGB {
+  red: number,
+  green: number,
+  blue: number
+}
+
+export interface HSL {
+  hue: number,
+  saturation: number,
+  lightness: number
+}
+
+
+
 export class Color {
   private _red: number = -1;
   private _green: number =-1;
   private _blue: number = -1;
   private _alpha: number = -1;
-
 
   get redChannel(): number {
     return this._red;
@@ -49,7 +63,6 @@ export class Color {
         this._blue = parseInt(_str.substr(4, 2), 16);
         this._alpha = 1;
       }
-
 
       if (isHSLValue(red)) {
         const res = hslValueRegex!.exec(red) || [];
@@ -109,6 +122,22 @@ export class Color {
       this._blue = <number>blue;
       this._alpha = <number>alpha || 1;
     }
+  }
+
+  rgb(): RGB {
+    return {
+      red: this._red,
+      green: this._green,
+      blue: this._blue
+    }
+  }
+
+  hsl(): HSL {
+    return hsl(this);
+  }
+
+  luminosity(): number {
+    return calcRelativeLuminance(this);
   }
 
   toHex(): string {
@@ -177,8 +206,8 @@ export class Color {
     /* Calculate saturation */
     sat = delta === 0 ? 0 : delta / (1 - Math.abs(2 * light - 1));
 
-    sat = +(sat * 100).toFixed(1);
-    light = +(light * 100).toFixed(1);
+    sat = +(Math.round(sat * 100)).toFixed(1);
+    light = +(Math.round(light * 100)).toFixed(1);
 
     return `hsl(${hue}, ${sat}%, ${light}%)`;
   }
@@ -212,27 +241,27 @@ export function isHSLValue(value: string): boolean {
   return false;
 }
 
-export function hsl(
+function hsl(
   color: Color
-): { hue: number; saturation: number; lightness: number } {
+): HSL {
   const res = hslValueRegex!.exec(color.toHSL()) || [];
   return {
     hue: +res[1],
-    saturation: +res[2],
-    lightness: +res[3]
-  };
+    saturation: +(Math.round(+res[2]).toFixed(2)),
+    lightness: +(Math.round(+res[3]).toFixed(2))
+  } as HSL;
 }
 
-export function rgb(
+function rgb(
   color: Color
-): { red: number; green: number; blue: number } {
+): RGB {
   const res = rgbValueRegex!.exec(color.toRGB()) || [];
   
   return {
     red: +res[1],
     green: +res[2],
     blue: +res[3]
-  };
+  } as RGB;
 }
 
 

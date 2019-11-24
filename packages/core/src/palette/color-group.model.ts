@@ -1,4 +1,5 @@
 import { Color } from "../color/color.model";
+import { noColorFoundAtIndexException } from "./palette-errors";
 
 export class ColorGroup implements IterableIterator<Color> {
   private _pointer = 0;
@@ -107,7 +108,11 @@ export class ColorGroup implements IterableIterator<Color> {
   }
 
   public get(index: number): Color {
-    return this._colors[index];
+    const color = this._colors[index];
+    if(!color) {
+      throw noColorFoundAtIndexException(index);
+    }
+    return color;
   }
 
   public add(color: Color): ColorGroup {
@@ -175,5 +180,5 @@ function updateColorAtIndex(colors: Color[], index: number, color: Color): Color
       ...colors.slice(index + 1)
     ];
   }
-  throw new Error('Cannont find color at index');
+  throw noColorFoundAtIndexException(index);
 }

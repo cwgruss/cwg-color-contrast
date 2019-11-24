@@ -25,7 +25,7 @@ function channelLuminance(RGBnum: number): number {
     return lum;
 }
 
-function calcRelativeLuminance(RGBnum: Color): number {
+export function calcRelativeLuminance(RGBnum: Color): number {
     const relLuminance = (rc * channelLuminance(RGBnum.redChannel)) 
         + (gc * channelLuminance(RGBnum.greenChannel)) 
         + (bc * channelLuminance(RGBnum.blueChannel));
