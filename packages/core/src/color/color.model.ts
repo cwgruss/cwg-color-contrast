@@ -28,6 +28,7 @@ export class Color {
   private _green: number =-1;
   private _blue: number = -1;
   private _alpha: number = -1;
+  private _hex: number = -1;
 
   get redChannel(): number {
     return this._red;
@@ -140,7 +141,19 @@ export class Color {
     return calcRelativeLuminance(this);
   }
 
-  toHex(): string {
+  toHex(): [number, number, number] {
+    const red = decimalToHexString(this._red);
+    const green = decimalToHexString(this._green);
+    const blue = decimalToHexString(this._blue); 
+       
+    return [
+      parseInt(red, 16),
+      parseInt(green, 16),
+      parseInt(blue, 16)
+    ];
+  }
+
+  toHexString(): string {
     let red = this._red.toString(16);
     let green = this._green.toString(16);
     let blue = this._blue.toString(16);
@@ -156,21 +169,21 @@ export class Color {
     return `#${red}${green}${blue}`;
   }
 
-  toHexA(): string {
+  toHexAString(): string {
     let alpha = this._alpha.toString(16);
     alpha = alpha.length === 1 ? `0${alpha}` : alpha;
-    return `${this.toHex()}${this._alpha}`;
+    return `${this.toHexString()}${this._alpha}`;
   }
 
-  toRGB(): string {
+  toRGBString(): string {
     return `rgb(${this._red}, ${this._green}, ${this._blue})`;
   }
 
-  toRGBA(): string {
+  toRGBAString(): string {
     return `rgba(${this._red}, ${this._green}, ${this._blue}, ${this._alpha})`;
   }
 
-  toHSL(): string {
+  toHSLString(): string {
     /* R,G,B fractions of 1. */
     let r = this._red / 255;
     let g = this._green / 255;
@@ -213,6 +226,17 @@ export class Color {
   }
 }
 
+
+function decimalToHexString(dec: number): string
+{
+  if (dec < 0)
+  {
+    dec = 0xFFFFFFFF + dec + 1;
+  }
+
+  return dec.toString(16).toUpperCase();
+}
+
 export function isHexValue(value: string): boolean {
   if (isString(value)) {
     return hexValueRegex.test(value);
@@ -244,7 +268,7 @@ export function isHSLValue(value: string): boolean {
 function hsl(
   color: Color
 ): HSL {
-  const res = hslValueRegex!.exec(color.toHSL()) || [];
+  const res = hslValueRegex!.exec(color.toHSLString()) || [];
   return {
     hue: +res[1],
     saturation: +(Math.round(+res[2]).toFixed(2)),
@@ -255,7 +279,7 @@ function hsl(
 function rgb(
   color: Color
 ): RGB {
-  const res = rgbValueRegex!.exec(color.toRGB()) || [];
+  const res = rgbValueRegex!.exec(color.toRGBString()) || [];
   
   return {
     red: +res[1],

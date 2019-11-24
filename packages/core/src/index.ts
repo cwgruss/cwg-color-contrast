@@ -20,11 +20,9 @@ console.log(colorGroup);
 
 
 for (const color of colorGroup) {
-    console.log(`HSL: ${color.toHSL()}`);
+    console.log(`HEX ${color.toHexString()}`);
     console.log(`luminosity: ${color.luminosity()}`);
-    const dark = desaturate(color, 0.86);
-    console.log(`desaturated by 10%: ${dark.toHSL()}`);
-    console.log(dark);
+    console.log(color.toHex().map((v => v === 0 ? '00' : v.toString(16))).join(''));
     
     console.log('----');
     
