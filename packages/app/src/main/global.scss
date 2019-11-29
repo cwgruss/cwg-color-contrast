@@ -1,0 +1,32 @@
+html {
+  /* Catch any browsers that still overscroll (eg Safari) */
+  /* background-color: #000; */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8em;
+  font-variant-ligatures: none;
+  --cell-size: 25px;
+  --cell-padding: 2px;
+  --side-margin: 10px;
+  --icon-size: 20px;
+  --circlebtn-size: 24px;
+  --bar-avoid: 40px;
+  --bar-padding: 5px;
+  --border-radius: 7px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overscroll-behavior: none;
+  height: 100%;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.main {
+  height: 100%;
+}

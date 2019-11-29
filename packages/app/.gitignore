@@ -1,1 +1,7 @@
 node_modules/
+.ts-tmp/
+dist/
+
+**/*.scss.d.scss
+**/*.scss.d.ts
+**/*.css.d.sss
