@@ -1,6 +1,25 @@
 {
-    "extends": "../../tsconfig.json",
-    "include": [
-        "src/index.ts"
+    "compilerOptions": {
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "noUnusedParameters": false,
+        "noImplicitAny": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": false,
+        "strictNullChecks": true,
+        "noImplicitReturns": true,
+        "strictFunctionTypes": true,
+        "noImplicitThis": true,
+        "skipLibCheck": true,
+		"outDir": "dist",
+        "target": "es5",
+        "lib": ["es6", "es2015", "dom"],
+        "strict": true,
+        "downlevelIteration": true,
+        "sourceMap": true
+    },
+    "exclude": [
+        "node_modules",
+        "src/**/*.test.ts"
     ]
 }

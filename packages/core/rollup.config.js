@@ -25,7 +25,6 @@ export default {
     plugins: [
         typescript({
 			clean: true,
-			cacheRoot: './.tmp/.rpt2_cache',
             typescript: require('typescript')
         }),
         terser(),
