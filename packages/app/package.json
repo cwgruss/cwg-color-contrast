@@ -18,7 +18,7 @@
     "escape-string-regexp": "^2.0.0",
     "find": "^0.3.0",
     "http-server": "^0.12.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "postcss-url": "^8.0.0",
     "preact": "^10.0.5",
     "preact-router": "^3.1.0",
